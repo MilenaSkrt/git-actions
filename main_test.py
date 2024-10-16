@@ -1,6 +1,6 @@
 import unittest
 import math
-from your_module import simpson, rectangle, trapezoid, f   # Replace 'your_module' with the actual module name
+from main import simpson, rectangle, trapezoid, f   # Replace 'your_module' with the actual module name
 
 class IntegrationTests(unittest.TestCase):
     
