@@ -1,0 +1,25 @@
+name: Python application
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # Укажите версию Python, которую вы хотите использовать
+
+    - name: Install dependencies
+      run: |
+        pip install sympy numpy matplotlib  # Укажите все необходимые зависимости
+
+    - name: Run script
+      run: |
+        python main.py
