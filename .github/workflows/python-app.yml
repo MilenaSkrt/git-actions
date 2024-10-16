@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -13,32 +14,16 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'  # Specify Python version for the build step
+        python-version: '3.8'  # Укажите версию Python, которую вы хотите использовать
 
     - name: Install dependencies
       run: |
-        pip install sympy numpy matplotlib  # List all required dependencies
+        pip install -r requirements.txt  # Установка зависимостей из файла requirements.txt
 
     - name: Run script
       run: |
-        python main.py  # Run your main application script
-
-  test:
-    runs-on: windows-latest  # Use Windows runner for testing
-
-    steps:
-    - name: Check out the code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.11'  # Specify Python version for the test step
-
-    - name: Install dependencies
-      run: |
-        pip install pytest sympy numpy  # Install pytest and other dependencies required for testing
+        python main.py  # Запускает основной скрипт
 
     - name: Run tests
       run: |
-        pytest test_script.py  # Replace `test_script.py` with the actual name of your test file
+        pytest test_main.py  # Запускает тесты
