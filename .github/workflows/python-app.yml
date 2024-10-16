@@ -3,27 +3,18 @@ name: Python application
 on: [push, pull_request]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Check out the code
-      uses: actions/checkout@v2
-
+    - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'  # Укажите версию Python, которую вы хотите использовать
-
+        python-version: '3.8'  # You can specify the Python version you need
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt  # Установка зависимостей из файла requirements.txt
-
-    - name: Run script
-      run: |
-        python main.py  # Запускает основной скрипт
-
+        python -m pip install --upgrade pip
+        pip install numpy matplotlib sympy
     - name: Run tests
       run: |
-        pytest test_main.py  # Запускает тесты
+        python -m unittest discover -s . -p "test_*.py"
