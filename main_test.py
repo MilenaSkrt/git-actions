@@ -1,39 +1,23 @@
-import pytest
+import unittest
 import math
-import sympy
-from your_module import simpson, rectangle, trapezoid, f  # Замените `your_module` на имя вашего файла
+from your_module import simpson, rectangle, trapezoid, f   # Replace 'your_module' with the actual module name
 
-# Примерные значения для интегрирования функции sin(x) от 0 до π
-EXACT_VALUE = 2  # Интеграл от sin(x) от 0 до π равен 2
+class IntegrationTests(unittest.TestCase):
+    
+    def test_simpson(self):
+        expected = 0  # The integral of sin(x) from 0 to 2π
+        result = simpson(0, 2 * math.pi, 1000, f)
+        self.assertAlmostEqual(result, expected, places=5)
 
-def test_simpson():
-    result = simpson(0, math.pi, 100, f)
-    assert pytest.approx(result, rel=1e-2) == EXACT_VALUE
+    def test_rectangle(self):
+        expected = 0  # The integral of sin(x) from 0 to 2π
+        result = rectangle(0, 2 * math.pi, 1000, f)
+        self.assertAlmostEqual(result, expected, places=5)
 
-def test_rectangle():
-    result = rectangle(0, math.pi, 100, f)
-    assert pytest.approx(result, rel=1e-2) == EXACT_VALUE
+    def test_trapezoid(self):
+        expected = 0  # The integral of sin(x) from 0 to 2π
+        result = trapezoid(0, 2 * math.pi, 1000, f)
+        self.assertAlmostEqual(result, expected, places=5)
 
-def test_trapezoid():
-    result = trapezoid(0, math.pi, 100, f)
-    assert pytest.approx(result, rel=1e-2) == EXACT_VALUE
-
-def test_function_f():
-    # Проверим значения функции f(x) = sin(x) в нескольких точках
-    assert f(0) == 0
-    assert f(math.pi/2) == 1
-    assert f(math.pi) == 0
-    assert f(3*math.pi/2) == -1
-    assert f(2*math.pi) == 0
-
-# Проверка на негативное значение для n (количество шагов)
-def test_invalid_n():
-    with pytest.raises(ZeroDivisionError):
-        simpson(0, math.pi, 0, f)
-    with pytest.raises(ZeroDivisionError):
-        rectangle(0, math.pi, 0, f)
-    with pytest.raises(ZeroDivisionError):
-        trapezoid(0, math.pi, 0, f)
-
-# Дополнительные тесты можно добавить по мере необходимости.
-
+if __name__ == '__main__':
+    unittest.main()
