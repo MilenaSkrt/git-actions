@@ -3,7 +3,7 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - main  # Specify your main branch
+      - main  # Укажите вашу основную ветку
   pull_request:
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'  # Specify the required Python version
+        python-version: '3.8'  # Укажите необходимую версию Python
 
     - name: Install dependencies
       run: |
@@ -28,14 +28,14 @@ jobs:
         pytest --html=report.html --self-contained-html
 
     - name: Upload Test Report
-      uses: actions/upload-artifact@v3  # Updated to v3
+      uses: actions/upload-artifact@v3  # Используйте последнюю версию
       with:
         name: test-report
-        path: report.html  # Uploads the HTML report
+        path: report.html  # Загружает HTML-отчет
 
     - name: Upload Source Code
-      if: success()  # Uploads code only if tests passed
-      uses: actions/upload-artifact@v3  # Updated to v3
+      if: success()  # Загружает код только при успешном завершении тестов
+      uses: actions/upload-artifact@v3  # Используйте последнюю версию
       with:
         name: source-code
-        path: .  # Uploads all code from the root directory
+        path: .  # Загружает весь код из корневой директории
