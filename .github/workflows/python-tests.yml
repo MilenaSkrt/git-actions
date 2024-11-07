@@ -1,23 +1,32 @@
 name: Python Tests
 
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+      - main  # Укажите вашу основную ветку
+  pull_request:
 
 jobs:
   tests:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.8'  # Укажите нужную версию Python
+
     - name: Install dependencies
       run: |
         pip install pytest pytest-html
+
     - name: Run tests
       run: |
         pytest --html=report.html --self-contained-html
+
     - name: Upload Report
       uses: actions/upload-artifact@v2
       with:
