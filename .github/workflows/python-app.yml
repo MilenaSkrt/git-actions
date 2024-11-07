@@ -21,7 +21,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install pytest pytest-html
+        pip install pytest pytest-html sympy  # Убедитесь, что все необходимые модули установлены
 
     - name: Run tests
       run: |
